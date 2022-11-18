@@ -50,12 +50,12 @@ export default class Supercluster {
 
         // cluster points on max zoom, then cluster the results on previous zoom, etc.;
         // results in a cluster hierarchy across zoom levels
-        // clusters = this._cluster(clusters, 1);
+        clusters = this._cluster(clusters, 1);
         for (let z = maxZoom; z >= minZoom; z--) {
             const now = +Date.now();
 
             // create a new set of clusters for the zoom and index them with a KD-tree
-            clusters = this._cluster(clusters, z);
+            // clusters = this._cluster(clusters, z);
             this.trees[z] = new KDBush(clusters, getX, getY, nodeSize, Float32Array);
 
             if (log) console.log('z%d: %d clusters in %dms', z, clusters.length, +Date.now() - now);
